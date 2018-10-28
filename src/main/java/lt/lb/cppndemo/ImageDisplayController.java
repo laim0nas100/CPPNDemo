@@ -5,7 +5,6 @@
  */
 package lt.lb.cppndemo;
 
-import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.net.URL;
@@ -18,15 +17,11 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.FutureTask;
 import java.util.concurrent.atomic.AtomicLong;
 import javafx.embed.swing.SwingFXUtils;
-import javafx.event.EventType;
 import javafx.fxml.FXML;
-import javafx.scene.control.ContextMenu;
-import javafx.scene.control.MenuItem;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.PixelWriter;
 import javafx.scene.image.WritableImage;
 import javax.imageio.ImageIO;
-import javax.swing.event.HyperlinkEvent;
 import lt.lb.commons.F;
 import lt.lb.commons.Lambda;
 import lt.lb.commons.Log;
@@ -69,7 +64,7 @@ public class ImageDisplayController implements InjectableController {
                 Log.print("Exporting");
                 F.unsafeRunWithHandler(FXMLController::alert, () -> {
                     BufferedImage fromFXImage = SwingFXUtils.fromFXImage(view.getImage(), null);
-                    ImageIO.write(fromFXImage, "png", new File(new SimpleDateFormat("YYYY-MM-DD HH-mm-ss").format(new Date())+" "+frame.getTitle()+".png"));
+                    ImageIO.write(fromFXImage, "png", new File(new SimpleDateFormat("YYYY-MM-DD HH-mm-ss").format(new Date()) + " " + frame.getTitle() + ".png"));
                 });
             }
         });
@@ -132,8 +127,8 @@ public class ImageDisplayController implements InjectableController {
     public PixelWriter prepareImage(int w, int h, Tuple<Lambda.L5R<NeuralNetwork, Integer, Integer, Integer, Integer, LPixel>, Lambda.L2<PixelWriter, LPixel>> tuple) {
         WritableImage fxImage = new WritableImage(w, h);
         view.setImage(fxImage);
-        frame.getStage().setHeight(Math.max(fxImage.getHeight(), 200));
-        frame.getStage().setWidth(Math.max(fxImage.getWidth(), 200));
+        frame.getStage().setHeight(Math.max(h, 200)+10);
+        frame.getStage().setWidth(Math.max(w, 200)+10);
         this.pixelWriterL = tuple.getG2();
         this.neuralNetWriterL = tuple.getG1();
         return fxImage.getPixelWriter();

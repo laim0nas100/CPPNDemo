@@ -6,24 +6,16 @@
 package lt.lb.cppndemo;
 
 import java.net.URL;
-import java.util.LinkedList;
 import java.util.Optional;
 import java.util.ResourceBundle;
-import java.util.concurrent.Callable;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ConcurrentLinkedDeque;
-import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
 import java.util.concurrent.FutureTask;
 import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicLong;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
 import javafx.scene.image.PixelWriter;
 import javafx.scene.image.WritableImage;
 import lt.lb.commons.F;
@@ -34,11 +26,8 @@ import lt.lb.commons.containers.tuples.Tuple3;
 import lt.lb.commons.containers.tuples.Tuples;
 import lt.lb.commons.javafx.FX;
 import lt.lb.commons.javafx.scenemanagement.Frame;
-import lt.lb.commons.javafx.scenemanagement.InjectableController;
 import lt.lb.commons.misc.rng.FastRandom;
 import lt.lb.commons.misc.rng.RandomDistribution;
-import lt.lb.commons.threads.FastWaitingExecutor;
-import lt.lb.commons.threads.TaskBatcher;
 import lt.lb.neurevol.evolution.NEAT.Genome;
 import lt.lb.neurevol.evolution.NEAT.imp.DefaultHyperNEATMutator;
 import lt.lb.neurevol.evolution.NEAT.interfaces.AgentMutator;
@@ -156,7 +145,10 @@ public class EvolvingImageDisplayController extends ImageDisplayController {
         this.dim = new Tuple<>(w, h);
         tWidth.setText(w+"");
         tHeight.setText(h+"");
-        return super.prepareImage(w, h, tuple);
+        PixelWriter prepareImage = super.prepareImage(w, h, tuple);
+         frame.getStage().setHeight(Math.max(h, 200) + 115);
+        frame.getStage().setWidth(Math.max(w, 200) + 35);
+        return prepareImage;
     }
 
     @Override

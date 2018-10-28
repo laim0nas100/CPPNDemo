@@ -8,8 +8,6 @@ import lt.lb.commons.javafx.scenemanagement.MultiStageManager;
 
 public class MainApp{
 
-    
-
 
     public static MultiStageManager manager;
     public static void main(String[] args) throws Exception{

@@ -8,37 +8,41 @@
     <packaging>jar</packaging>
 
     <name>CPPNDemo</name>
+    <repositories>
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
+    </repositories>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <mainClass>lt.lb.cppndemo.MainApp</mainClass>
+        <commonslbDir>com.github.laim0nas100.Commons</commonslbDir>
+        <commonslbVer>b062e7c0ab8a8f9a08a3a1986cbaff4c8adb515d</commonslbVer>
     </properties>
 
-    <organization>
-        <!-- Used as the 'Vendor' for JNLP generation -->
-        <name>Your Organisation</name>
-    </organization>
     
     <dependencies>
         <dependency>
-            <groupId>lt.lb.commons</groupId>
+            <groupId>${commonslbDir}</groupId>
             <artifactId>commonslb-core</artifactId>
-            <version>local-jar</version>
+            <version>${commonslbVer}</version>
         </dependency>
         <dependency>
-            <groupId>lt.lb.commons</groupId>
+            <groupId>${commonslbDir}</groupId>
             <artifactId>commonslb-log</artifactId>
-            <version>local-jar</version>
+            <version>${commonslbVer}</version>
         </dependency>
         <dependency>
-            <groupId>lt.lb.commons</groupId>
+            <groupId>${commonslbDir}</groupId>
             <artifactId>commonslb-javafx</artifactId>
-            <version>local-jar</version>
+            <version>${commonslbVer}</version>
         </dependency>
         <dependency>
-            <groupId>lt.lb</groupId>
+            <groupId>com.github.laim0nas100</groupId>
             <artifactId>NeurEvol</artifactId>
-            <version>local-jar</version>
+            <version>d1dabb4af33b9cdd7bb3042a549d9bb2faad0300</version>
         </dependency>
     </dependencies>
 
