@@ -43,7 +43,6 @@ public class EvolvingImageDisplayController extends ImageDisplayController {
     public static final String resource = "/fxml/EvolvingImageDisplay.fxml";
     public static AtomicLong idGen = new AtomicLong(1);
 
-
     public CheckBox paused;
 
     @FXML
@@ -88,7 +87,7 @@ public class EvolvingImageDisplayController extends ImageDisplayController {
             Frame newFrame = MainApp.manager.newFrame(res, "Image " + ImageDisplayController.idGen.getAndIncrement());
             ImageDisplayController contr = F.cast(newFrame.getController());
 
-            Tuple3<NNInfo, Lambda.L5R<NeuralNetwork, Integer, Integer,Integer,Integer, FXMLController.LPixel>, Lambda.L2<PixelWriter, FXMLController.LPixel>> tuple3 = Tuples.create(this.info, this.neuralNetWriterL, this.pixelWriterL);
+            Tuple3<NNInfo, Lambda.L5R<NeuralNetwork, Integer, Integer, Integer, Integer, FXMLController.LPixel>, Lambda.L2<PixelWriter, FXMLController.LPixel>> tuple3 = Tuples.create(this.info, this.neuralNetWriterL, this.pixelWriterL);
             FX.submit(() -> {
                 newFrame.getStage().show();
                 FutureTask setImage = contr.setImage(w, h, tuple3);
@@ -112,7 +111,7 @@ public class EvolvingImageDisplayController extends ImageDisplayController {
                 newFrame.getStage().show();
                 DefaultHyperNEATMutator mutator = new DefaultHyperNEATMutator(RandomDistribution.uniform(new FastRandom()));
                 Log.print("Before prepare image");
-                contr.prepareImage(w, h, Tuples.create(this.neuralNetWriterL, this.pixelWriterL) );
+                contr.prepareImage(w, h, Tuples.create(this.neuralNetWriterL, this.pixelWriterL));
                 Log.print("After prepare image");
                 Genome genome = F.cast(this.genome.clone());
                 NeuralNetwork network = genome.getNetwork();
@@ -138,15 +137,14 @@ public class EvolvingImageDisplayController extends ImageDisplayController {
         }
 
     }
-    
 
     @Override
-    public PixelWriter prepareImage(int w, int h, Tuple<Lambda.L5R<NeuralNetwork, Integer, Integer,Integer,Integer, FXMLController.LPixel>, Lambda.L2<PixelWriter, FXMLController.LPixel>> tuple) {
+    public PixelWriter prepareImage(int w, int h, Tuple<Lambda.L5R<NeuralNetwork, Integer, Integer, Integer, Integer, FXMLController.LPixel>, Lambda.L2<PixelWriter, FXMLController.LPixel>> tuple) {
         this.dim = new Tuple<>(w, h);
-        tWidth.setText(w+"");
-        tHeight.setText(h+"");
+        tWidth.setText(w + "");
+        tHeight.setText(h + "");
         PixelWriter prepareImage = super.prepareImage(w, h, tuple);
-         frame.getStage().setHeight(Math.max(h, 200) + 115);
+        frame.getStage().setHeight(Math.max(h, 200) + 115);
         frame.getStage().setWidth(Math.max(w, 200) + 35);
         return prepareImage;
     }
